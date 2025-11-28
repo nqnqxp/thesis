@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4265a041954897941afec871c608473b, type: 3}
   m_Name: Crt
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   scanlinesWeight:
     m_OverrideState: 1
     m_Value: 0.98
@@ -496,10 +496,10 @@ MonoBehaviour:
   active: 1
   widthPixelation:
     m_OverrideState: 1
-    m_Value: 256
+    m_Value: 575.3
   heightPixelation:
     m_OverrideState: 1
-    m_Value: 256
+    m_Value: 560
   colorPrecision:
     m_OverrideState: 1
     m_Value: -95.94
