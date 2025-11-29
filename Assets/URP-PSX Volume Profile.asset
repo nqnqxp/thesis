@@ -129,25 +129,25 @@ MonoBehaviour:
   active: 1
   scanlinesWeight:
     m_OverrideState: 1
-    m_Value: 0.98
+    m_Value: 8.26
   noiseWeight:
     m_OverrideState: 1
-    m_Value: 4.6
+    m_Value: 8.83
   screenBendX:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 5
   screenBendY:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 5
   vignetteAmount:
     m_OverrideState: 1
-    m_Value: -4.58
+    m_Value: 0
   vignetteSize:
     m_OverrideState: 1
-    m_Value: -3
+    m_Value: 0
   vignetteRounding:
     m_OverrideState: 1
-    m_Value: 5.26
+    m_Value: 5
   vignetteSmoothing:
     m_OverrideState: 1
     m_Value: 0.59
@@ -159,22 +159,22 @@ MonoBehaviour:
     m_Value: 354.9
   noiseAmount:
     m_OverrideState: 1
-    m_Value: -224.6
+    m_Value: 0
   chromaticRed:
     m_OverrideState: 1
     m_Value: {x: 0, y: -0.002}
   chromaticGreen:
     m_OverrideState: 1
-    m_Value: {x: -0.002, y: 0.002}
+    m_Value: {x: 0, y: 0}
   chromaticBlue:
     m_OverrideState: 1
     m_Value: {x: 0, y: 0}
   grilleOpacity:
     m_OverrideState: 1
-    m_Value: 0.54
+    m_Value: 0
   grilleCounterOpacity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0
   grilleResolution:
     m_OverrideState: 1
     m_Value: 360
@@ -186,7 +186,7 @@ MonoBehaviour:
     m_Value: 189.9
   grilleBrightness:
     m_OverrideState: 1
-    m_Value: 91.2
+    m_Value: 304
   grilleUvMidPoint:
     m_OverrideState: 1
     m_Value: 0.5
@@ -496,7 +496,7 @@ MonoBehaviour:
   active: 1
   widthPixelation:
     m_OverrideState: 1
-    m_Value: 575.3
+    m_Value: 560
   heightPixelation:
     m_OverrideState: 1
     m_Value: 560
@@ -555,13 +555,13 @@ MonoBehaviour:
     m_Value: 0
   ditherThreshold:
     m_OverrideState: 1
-    m_Value: 31.72
+    m_Value: 16.7
   ditherStrength:
     m_OverrideState: 1
-    m_Value: 66.95
+    m_Value: 33.7
   ditherScale:
     m_OverrideState: 1
-    m_Value: 4.67
+    m_Value: 6
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,7 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e021b4c809a781e468c2988c016ebbea, type: 3}
   m_Name: ColorLookup
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.ColorLookup
-  active: 1
+  active: 0
   texture:
     m_OverrideState: 1
     m_Value: {fileID: 0}
@@ -763,13 +763,13 @@ MonoBehaviour:
   active: 1
   type:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 2
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.06
   response:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 0.86
   texture:
     m_OverrideState: 1
     m_Value: {fileID: 0}
@@ -785,7 +785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.ChromaticAberration
-  active: 1
+  active: 0
   intensity:
     m_OverrideState: 1
     m_Value: 0
@@ -801,7 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
   m_Name: WhiteBalance
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.WhiteBalance
-  active: 1
+  active: 0
   temperature:
     m_OverrideState: 1
     m_Value: 0
