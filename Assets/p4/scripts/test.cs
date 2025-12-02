@@ -60,11 +60,8 @@ public class test : MonoBehaviour
                 directionChanges = 0;
             }
         }
-
         lastDirection = currentDirection;
-        
     }
-
 
     public void ApplyRandomSprite()
     {
