@@ -10,7 +10,7 @@ public class story : MonoBehaviour
     [SerializeField] private Camera c5;
     [SerializeField] private Camera fpc;
 
-    public test fpcBool;
+    public test handScript;
     public bool eightBall;
 
     public captionController ccScript;
@@ -28,10 +28,14 @@ public class story : MonoBehaviour
     void Update()
     {
         if (eightBall == true) {
-            StartCoroutine(changeCam(0.1f, fpc));
-            fpcBool.camChanged = true;
+            StartCoroutine(changeCam(0.5f, fpc));
+            handScript.camChanged = true;
             sg.GetComponent<Animator>().SetBool("isWalking", false);
             sg.GetComponent<pControl>().enabled = false;
+        }
+
+        if (handScript.good == true) {
+            StartCoroutine(changeCam(2f, c5));
         }
     }
 
@@ -50,10 +54,10 @@ public class story : MonoBehaviour
 
     private IEnumerator scriptControl()
     {
-        fpcBool.enabled = false;
+        handScript.enabled = false;
         ccScript.enabled = false;
         yield return new WaitForSeconds(6.5f);
-        fpcBool.enabled = true;
+        handScript.enabled = true;
         ccScript.enabled = true;
     }
 }

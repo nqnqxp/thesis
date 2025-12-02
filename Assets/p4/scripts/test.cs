@@ -22,6 +22,10 @@ public class test : MonoBehaviour
 
     public bool camChanged;
 
+    public bool good;
+    public bool bad;
+    public bool maybe;
+
     void Update()
     {
         if (camChanged == true)
@@ -67,5 +71,27 @@ public class test : MonoBehaviour
     {
         int randomIndex = Random.Range(0, spritesToRandomize.Count);
         hand.sprite = spritesToRandomize[randomIndex];
+
+        if (hand.sprite.name == "good1" || hand.sprite.name == "good2")
+        {
+            Debug.Log("good");
+            good = true;
+            bad = false;
+            maybe = false;
+        }
+        if (hand.sprite.name == "bad1" || hand.sprite.name == "bad2")
+        {
+            Debug.Log("bad");
+            bad = true;
+            good = false;
+            maybe = false;
+        }
+        if (hand.sprite.name == "maybe1" || hand.sprite.name == "maybe2")
+        {
+            Debug.Log("maybe");
+            maybe = true;
+            good = false;
+            bad = false;
+        }
     }
 }
