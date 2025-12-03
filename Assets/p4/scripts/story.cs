@@ -88,7 +88,7 @@ public class story : MonoBehaviour
     private IEnumerator hsGoodCamTrans()
     {
         c5.GetComponent<Animator>().Play("panC5");
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(6f);
         StartCoroutine(changeCam(2f, c6));
     }
 }
