@@ -9,6 +9,7 @@ public class startGame : MonoBehaviour
 
     public GameObject ant1;
     public GameObject ant2;
+    public GameObject ant3;
     public bool gameStarted;
     
     public void startGameButton()
@@ -23,9 +24,12 @@ public class startGame : MonoBehaviour
         startButtonn.interactable = false;
         yield return new WaitForSeconds(1f);
         ant1.gameObject.SetActive(true);
-        yield return new WaitForSeconds(5.83f);
-        ant1.gameObject.SetActive(false);
         ant2.gameObject.SetActive(true);
+        ant3.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        ant1.gameObject.SetActive(false);
+        ant2.gameObject.SetActive(false);
+        ant3.gameObject.SetActive(false);
     }
 
 

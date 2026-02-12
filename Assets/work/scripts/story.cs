@@ -37,7 +37,7 @@ public class story : MonoBehaviour
     {
         if (startBool.gameStarted == true)
         {
-            StartCoroutine(changeCam(3.5f, c2p5));
+            StartCoroutine(changeCam(2.5f, c2p5));
             StartCoroutine(scriptControl());
         }
 
