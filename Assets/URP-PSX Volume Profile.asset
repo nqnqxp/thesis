@@ -85,7 +85,7 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.4
+    m_Value: 0.36
   intensity:
     m_OverrideState: 1
     m_Value: 0.42
@@ -561,7 +561,7 @@ MonoBehaviour:
     m_Value: 33.7
   ditherScale:
     m_OverrideState: 1
-    m_Value: 6
+    m_Value: 3
 --- !u!114 &-875963932980996764
 MonoBehaviour:
   m_ObjectHideFlags: 3

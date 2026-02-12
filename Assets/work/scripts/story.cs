@@ -3,14 +3,14 @@ using System.Collections;
 
 public class story : MonoBehaviour
 {
-    [SerializeField] private Camera c1;
-    [SerializeField] private Camera c2;
-    [SerializeField] private Camera c2p5;
-    [SerializeField] private Camera c3;
-    [SerializeField] private Camera c4;
-    [SerializeField] private Camera c5;
-    [SerializeField] private Camera c6;
-    [SerializeField] private Camera fpc;
+    [SerializeField] private GameObject c1;
+    [SerializeField] private GameObject c2;
+    [SerializeField] private GameObject c2p5;
+    [SerializeField] private GameObject c3;
+    [SerializeField] private GameObject c4;
+    [SerializeField] private GameObject c5;
+    [SerializeField] private GameObject c6;
+    [SerializeField] private GameObject fpc;
 
     public startGame startBool;
     public test handScript;
@@ -73,18 +73,29 @@ public class story : MonoBehaviour
         
     }
 
-    private IEnumerator changeCam(float seconds, Camera nextCam)
+    private IEnumerator changeCam(float seconds, GameObject nextCam)
     {
         yield return new WaitForSeconds(seconds);
         //nextCam.depth = 1;
-        c1.depth = 0;
-        c2.depth = 0;
-        c2p5.depth = 0;
-        c3.depth = 0;
-        c4.depth = 0;
-        c5.depth = 0;
-        fpc.depth = 0;
-        nextCam.depth = 1;
+        /*
+        c1.GetComponent<Camera>().depth = 0;
+        c2.GetComponent<Camera>().depth = 0;
+        c2p5.GetComponent<Camera>().depth = 0;
+        c3.GetComponent<Camera>().depth = 0;
+        c4.GetComponent<Camera>().depth = 0;
+        c5.GetComponent<Camera>().depth = 0;
+        fpc.GetComponent<Camera>().depth = 0;
+        nextCam.GetComponent<Camera>().depth = 1;
+        */
+        
+        c1.gameObject.SetActive(false);
+        c2.gameObject.SetActive(false);
+        c2p5.gameObject.SetActive(false);
+        c3.gameObject.SetActive(false);
+        c4.gameObject.SetActive(false);
+        c5.gameObject.SetActive(false);
+        fpc.gameObject.SetActive(false);
+        nextCam.gameObject.SetActive(true);
 
     }
 
