@@ -5,12 +5,14 @@ public class story : MonoBehaviour
 {
     [SerializeField] private Camera c1;
     [SerializeField] private Camera c2;
+    [SerializeField] private Camera c2p5;
     [SerializeField] private Camera c3;
     [SerializeField] private Camera c4;
     [SerializeField] private Camera c5;
     [SerializeField] private Camera c6;
     [SerializeField] private Camera fpc;
 
+    public startGame startBool;
     public test handScript;
     public bool eightBall;
 
@@ -19,18 +21,27 @@ public class story : MonoBehaviour
     public bool resultOut;
 
     [SerializeField] private GameObject sg;
-    [SerializeField] private GameObject cam5;
+    //[SerializeField] private GameObject cam5;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
-        StartCoroutine(changeCam(6.5f, c2));
-        StartCoroutine(scriptControl());
+        //StartCoroutine(changeCam(6.5f, c2));
+
+        handScript.enabled = false;
+        ccScript.enabled = false;
+
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (startBool.gameStarted == true)
+        {
+            StartCoroutine(changeCam(3.5f, c2p5));
+            StartCoroutine(scriptControl());
+        }
+
+
         if (eightBall == true) {
             StartCoroutine(changeCam(0.5f, fpc));
             handScript.camChanged = true;
@@ -68,6 +79,7 @@ public class story : MonoBehaviour
         //nextCam.depth = 1;
         c1.depth = 0;
         c2.depth = 0;
+        c2p5.depth = 0;
         c3.depth = 0;
         c4.depth = 0;
         c5.depth = 0;
@@ -78,9 +90,7 @@ public class story : MonoBehaviour
 
     private IEnumerator scriptControl()
     {
-        handScript.enabled = false;
-        ccScript.enabled = false;
-        yield return new WaitForSeconds(6.5f);
+        yield return new WaitForSeconds(6.5f);//change the time accordingly
         handScript.enabled = true;
         ccScript.enabled = true;
     }
