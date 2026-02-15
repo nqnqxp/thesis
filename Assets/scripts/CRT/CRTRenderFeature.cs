@@ -19,6 +19,7 @@ namespace PSX
             renderer.EnqueuePass(crtPass);
         }
 
+        [System.Obsolete("This method is obsolete. Use RenderGraph instead.", false)]
         public override void SetupRenderPasses(ScriptableRenderer renderer, in RenderingData renderingData)
         {
             crtPass.Setup(renderer.cameraColorTargetHandle);
@@ -77,6 +78,7 @@ namespace PSX
             this.crtMaterial = CoreUtils.CreateEngineMaterial(shader);
         }
 
+        [System.Obsolete("RenderGraph path only. Execute is unused.", false)]
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
             if (this.crtMaterial == null)

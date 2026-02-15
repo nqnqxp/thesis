@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering.RenderGraphModule;
 
 namespace PSX
 {
@@ -10,100 +11,87 @@ namespace PSX
 
         public override void Create()
         {
-            ditheringPass = new DitheringPass(RenderPassEvent.BeforeRenderingPostProcessing);
+            ditheringPass = new DitheringPass();
+            ditheringPass.renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
         }
 
-        //ScripstableRendererFeature is an abstract class, you need this method
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
         {
             renderer.EnqueuePass(ditheringPass);
         }
-        
-        public override void SetupRenderPasses(ScriptableRenderer renderer, in RenderingData renderingData)
+
+        protected override void Dispose(bool disposing)
         {
-            ditheringPass.Setup(renderer.cameraColorTargetHandle);
+            ditheringPass?.Dispose();
         }
     }
-    
-    
+
     public class DitheringPass : ScriptableRenderPass
     {
-        private static readonly string shaderPath = "PostEffect/Dithering";
-        static readonly string k_RenderTag = "Render Dithering Effects";
-        static readonly int MainTexId = Shader.PropertyToID("_MainTex");
-        static readonly int TempTargetId = Shader.PropertyToID("_TempTargetDithering");
+        private Material m_Material;
+        private static readonly string k_ShaderPath = "PostEffect/Dithering";
         
-        //PROPERTIES
-        static readonly int PatternIndex = Shader.PropertyToID("_PatternIndex");
-        static readonly int DitherThreshold = Shader.PropertyToID("_DitherThreshold");
-        static readonly int DitherStrength = Shader.PropertyToID("_DitherStrength");
-        static readonly int DitherScale = Shader.PropertyToID("_DitherScale");
-        
-        Dithering dithering;
-        Material ditheringMaterial;
-        RenderTargetIdentifier currentTarget;
-    
-        public DitheringPass(RenderPassEvent evt)
-        {
-            renderPassEvent = evt;
-            var shader = Shader.Find(shaderPath);
-            if (shader == null)
-            {
-                Debug.LogError("Shader not found.");
-                return;
-            }
-            this.ditheringMaterial = CoreUtils.CreateEngineMaterial(shader);
-        }
-    
-        public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
-        {
-            if (this.ditheringMaterial == null)
-            {
-                Debug.LogError("Material not created.");
-                return;
-            }
-    
-            if (!renderingData.cameraData.postProcessEnabled) return;
-    
-            var stack = VolumeManager.instance.stack;
-            
-            this.dithering = stack.GetComponent<Dithering>();
-            if (this.dithering == null) { return; }
-            if (!this.dithering.IsActive()) { return; }
-    
-            var cmd = CommandBufferPool.Get(k_RenderTag);
-            Render(cmd, ref renderingData);
-            context.ExecuteCommandBuffer(cmd);
-            CommandBufferPool.Release(cmd);
-        }
-    
-        public void Setup(in RenderTargetIdentifier currentTarget)
-        {
-            this.currentTarget = currentTarget;
-        }
-    
-        void Render(CommandBuffer cmd, ref RenderingData renderingData)
-        {
-            ref var cameraData = ref renderingData.cameraData;
-            var source = currentTarget;
-            int destination = TempTargetId;
-    
-            //getting camera width and height 
-            var w = cameraData.camera.scaledPixelWidth;
-            var h = cameraData.camera.scaledPixelHeight;
-            
-            //setting parameters here 
-            cameraData.camera.depthTextureMode = cameraData.camera.depthTextureMode | DepthTextureMode.Depth;
-            this.ditheringMaterial.SetInt(PatternIndex, this.dithering.patternIndex.value);
-            this.ditheringMaterial.SetFloat(DitherThreshold, this.dithering.ditherThreshold.value);
-            this.ditheringMaterial.SetFloat(DitherStrength, this.dithering.ditherStrength.value);
-            this.ditheringMaterial.SetFloat(DitherScale, this.dithering.ditherScale.value);
+        // Property IDs
+        private static readonly int k_PatternIndex = Shader.PropertyToID("_PatternIndex");
+        private static readonly int k_DitherThreshold = Shader.PropertyToID("_DitherThreshold");
+        private static readonly int k_DitherStrength = Shader.PropertyToID("_DitherStrength");
+        private static readonly int k_DitherScale = Shader.PropertyToID("_DitherScale");
 
-            int shaderPass = 0;
-            cmd.SetGlobalTexture(MainTexId, source);
-            cmd.GetTemporaryRT(destination, w, h, 0, FilterMode.Point, RenderTextureFormat.Default);
-            cmd.Blit(source, destination);
-            cmd.Blit(destination, source, this.ditheringMaterial, shaderPass);
+        public DitheringPass()
+        {
+            var shader = Shader.Find(k_ShaderPath);
+            if (shader != null) m_Material = CoreUtils.CreateEngineMaterial(shader);
         }
+
+        private class PassData
+        {
+            public TextureHandle source;
+            public Material material;
+            public Dithering settings;
+        }
+
+        public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
+        {
+            if (m_Material == null) return;
+
+            UniversalResourceData resourceData = frameData.Get<UniversalResourceData>();
+            UniversalCameraData cameraData = frameData.Get<UniversalCameraData>();
+
+            var stack = VolumeManager.instance.stack;
+            var dithering = stack.GetComponent<Dithering>();
+            if (dithering == null || !dithering.IsActive() || !cameraData.postProcessEnabled) return;
+
+            TextureHandle source = resourceData.activeColorTexture;
+
+            RenderTextureDescriptor desc = cameraData.cameraTargetDescriptor;
+            desc.depthBufferBits = 0; 
+            TextureHandle destination = UniversalRenderer.CreateRenderGraphTexture(renderGraph, desc, "_DitherTemp", true);
+
+            using (var builder = renderGraph.AddRasterRenderPass<PassData>("Dithering Pass", out var passData))
+            {
+                passData.source = source;
+                passData.material = m_Material;
+                passData.settings = dithering;
+
+                builder.UseTexture(source, AccessFlags.Read);
+                builder.SetRenderAttachment(destination, 0, AccessFlags.Write);
+
+                builder.SetRenderFunc((PassData data, RasterGraphContext context) =>
+                {
+                    data.material.SetInt(k_PatternIndex, data.settings.patternIndex.value);
+                    data.material.SetFloat(k_DitherThreshold, data.settings.ditherThreshold.value);
+                    data.material.SetFloat(k_DitherStrength, data.settings.ditherStrength.value);
+                    data.material.SetFloat(k_DitherScale, data.settings.ditherScale.value);
+
+                    Blitter.BlitTexture(context.cmd, data.source, new Vector4(1, 1, 0, 0), data.material, 0);
+                });
+            }
+
+            resourceData.cameraColor = destination;
+            //resourceData.activeColorTexture = destination;
+        }
+
+        public void Dispose() => CoreUtils.Destroy(m_Material);
     }
 }
+

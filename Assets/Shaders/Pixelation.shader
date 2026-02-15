@@ -2,66 +2,45 @@
 {
     Properties
     {
-        _MainTex("Texture", 2D) = "white" {}
+        [HideInInspector] _BlitTexture("Texture", 2D) = "white" {}
     }
-    
-    CGINCLUDE
-        #include "UnityCG.cginc"
-    
-        sampler2D _MainTex;  
-        
-        //for Pixelation      
-        float _WidthPixelation;
-        float _HeightPixelation;
-        
-        //for color precision
-        float _ColorPrecision;
-        
-        struct appdata
-        {
-            float4 vertex : POSITION;
-            float2 uv : TEXCOORD0;
-        };
-
-        struct v2f
-        {
-            float2 uv : TEXCOORD0;
-            float4 vertex : SV_POSITION;
-        };
-        
-        
-        v2f Vert(appdata v)
-        {
-            v2f o;
-            o.vertex = UnityObjectToClipPos(v.vertex);
-            o.uv = v.uv;
-            return o;
-        }
-
-        float4 Frag (v2f i) : SV_Target
-        {
-            //pixelation 
-            float2 uv = i.uv;
-            uv.x = floor(uv.x * _WidthPixelation) / _WidthPixelation;
-            uv.y = floor(uv.y * _HeightPixelation) / _HeightPixelation;
-            
-            float4 Color = tex2D(_MainTex, uv) ;
-            //color precision
-            Color = floor(Color * _ColorPrecision)/_ColorPrecision;
-            return Color;
-        }
-    ENDCG
     
     SubShader
     {
-        Cull Off ZWrite Off ZTest Always
         Tags { "RenderPipeline" = "UniversalPipeline"}
+        LOD 100
+        ZWrite Off Cull Off ZTest Always
+
         Pass
         {
-            CGPROGRAM
-                #pragma vertex Vert
-                #pragma fragment Frag
-            ENDCG
+            HLSLPROGRAM
+            #pragma vertex Vert
+            #pragma fragment Frag
+            
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
+
+            float _WidthPixelation;
+            float _HeightPixelation;
+            float _ColorPrecision;
+            
+            float4 Frag (Varyings i) : SV_Target
+            {
+                float2 screenRes = _ScreenParams.xy;
+                
+                float2 pixelCount = float2(_WidthPixelation, _HeightPixelation);
+                float2 uv = floor(i.texcoord * pixelCount) / pixelCount;
+                uv += (1.0 / pixelCount) * 0.5; 
+
+                float4 Color = SAMPLE_TEXTURE2D_X(_BlitTexture, sampler_LinearClamp, uv);
+
+                float precision = max(1.0, _ColorPrecision);
+
+                Color.rgb = floor(Color.rgb * precision + 0.5) / precision;
+
+                return Color;
+            }
+            ENDHLSL
         }
     }
 }
