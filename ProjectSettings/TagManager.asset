@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
+  - shot1
+  - shot2
+  - shot3
   layers:
   - Default
   - TransparentFX

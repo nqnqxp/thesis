@@ -7,7 +7,7 @@ public class pControl : MonoBehaviour
 
 	[SerializeField] private float speed = 3f;
     [SerializeField] private bool backMovement = false;
-    [SerializeField] private Camera fpc;
+    //[SerializeField] private Camera fpc;
 
 	Animator animator;
 

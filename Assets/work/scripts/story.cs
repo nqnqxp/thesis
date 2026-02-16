@@ -3,14 +3,20 @@ using System.Collections;
 
 public class story : MonoBehaviour
 {
-    [SerializeField] private GameObject c1;
+    [SerializeField] private GameObject shot1;
     [SerializeField] private GameObject c2;
-    [SerializeField] private GameObject c2p5;
+    [SerializeField] private GameObject shot2;
     [SerializeField] private GameObject c3;
+    [SerializeField] private GameObject shot3;
+    [SerializeField] private GameObject shot4;
     [SerializeField] private GameObject c4;
     [SerializeField] private GameObject c5;
     [SerializeField] private GameObject c6;
-    [SerializeField] private GameObject fpc;
+    [SerializeField] private GameObject fpc1;
+    [SerializeField] private GameObject fpc2;
+
+    public GameObject sgCharacterSit;
+    public GameObject sgCharacterStand;
 
     public startGame startBool;
     public test handScript;
@@ -20,8 +26,11 @@ public class story : MonoBehaviour
 
     public bool resultOut;
 
+    public bool shot2Started;
+    public bool shot3Started;
+    public bool shot4Started;
+
     [SerializeField] private GameObject sg;
-    //[SerializeField] private GameObject cam5;
 
 
     void Start()
@@ -30,6 +39,8 @@ public class story : MonoBehaviour
 
         handScript.enabled = false;
         ccScript.enabled = false;
+        sg.GetComponent<pControl>().enabled = false; //need to enable it when shot starts somewhere
+        sgCharacterStand.gameObject.SetActive(false);
 
     }
 
@@ -37,14 +48,36 @@ public class story : MonoBehaviour
     {
         if (startBool.gameStarted == true)
         {
-            StartCoroutine(changeCam(3.3f, c2p5));
-            StartCoroutine(scriptControl());
+            StartCoroutine(changeCam(3.3f, shot2));
+            StartCoroutine(detectShotChange(3.3f, shot2Bool));
+            startBool.gameStarted = false;
+            //StartCoroutine(scriptControl()); //move this to whenever is right before the walking!
+        }
+
+        if (shot2Started == true)
+        {
+            StartCoroutine(changeCam(4f, shot3));
+            StartCoroutine(detectShotChange(4f, shot3Bool));
+            shot2Started = false;
+        }
+
+        if (shot3Started == true)
+        {
+            StartCoroutine(changeCam(2.5f, shot4));
+            StartCoroutine(detectShotChange(2.5f, shot4Bool));
+            shot3Started = false;
+        }
+
+        if (shot4Started == true)
+        {
+            StartCoroutine(changeCam(3.5f, fpc2)); //may tweak after animation is done
+            shot4Started = false;
         }
 
 
         if (eightBall == true) {
-            StartCoroutine(changeCam(0.5f, fpc));
-            handScript.camChanged = true;
+            StartCoroutine(changeCam(0.5f, fpc1));
+            handScript.camChanged = true; //enable shake input
             sg.GetComponent<Animator>().SetBool("isWalking", false);
             sg.GetComponent<pControl>().enabled = false;
             eightBall = false;
@@ -76,33 +109,44 @@ public class story : MonoBehaviour
     private IEnumerator changeCam(float seconds, GameObject nextCam)
     {
         yield return new WaitForSeconds(seconds);
-        //nextCam.depth = 1;
-        /*
-        c1.GetComponent<Camera>().depth = 0;
-        c2.GetComponent<Camera>().depth = 0;
-        c2p5.GetComponent<Camera>().depth = 0;
-        c3.GetComponent<Camera>().depth = 0;
-        c4.GetComponent<Camera>().depth = 0;
-        c5.GetComponent<Camera>().depth = 0;
-        fpc.GetComponent<Camera>().depth = 0;
-        nextCam.GetComponent<Camera>().depth = 1;
-        */
-        
-        c1.gameObject.SetActive(false);
+        shot1.gameObject.SetActive(false);
         c2.gameObject.SetActive(false);
-        c2p5.gameObject.SetActive(false);
+        shot2.gameObject.SetActive(false);
+        shot3.gameObject.SetActive(false);
         c3.gameObject.SetActive(false);
         c4.gameObject.SetActive(false);
         c5.gameObject.SetActive(false);
-        fpc.gameObject.SetActive(false);
+        fpc1.gameObject.SetActive(false);
         nextCam.gameObject.SetActive(true);
 
+    }
+
+    private IEnumerator detectShotChange(float seconds, System.Action callback)
+    {
+        yield return new WaitForSeconds(seconds);
+        callback.Invoke();
+    }
+
+    void shot2Bool()
+    {
+        shot2Started = true;
+    }
+
+    void shot3Bool()
+    {
+        shot3Started = true;
+    }
+
+    void shot4Bool()
+    {
+        shot4Started = true;
     }
 
     private IEnumerator scriptControl()
     {
         yield return new WaitForSeconds(6.5f);//change the time accordingly
-        handScript.enabled = true;
+        //already handles enabling movement and disabling movement, check line
+        handScript.enabled = true; //doesn't enable 8ball shake entirely, its the same script but theres a bool check above that enables input
         ccScript.enabled = true;
     }
 
