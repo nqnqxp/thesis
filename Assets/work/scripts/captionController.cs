@@ -17,9 +17,13 @@ public class captionController : MonoBehaviour
     public TMP_Text c4Caption;
     public TMP_Text c5Caption;
 
+    public TMP_Text shot6Caption;
+
     public List<string> idleTexts;
 
     public test handScript;
+
+    //public pickLimbs checkDragCount;
 
     public bool fpcTextDone;
     private bool n1Done;
@@ -27,23 +31,97 @@ public class captionController : MonoBehaviour
     public bool firstMaybe;
     public bool secondMaybe;
 
+    //public GameObject shotW;
+    public GameObject shot6;
+    public bool reset;
+    public bool reset2;
+    public bool reset3;
+    public bool reset4;
+    public bool reset5;
+    public bool reset6;
+
     void Update()
     {
-        // D timer for c2
-        if (Input.GetKey(KeyCode.D))
-        {
-            idleTimer = 0f;
-        }
-        else
-        {
-            idleTimer += Time.deltaTime/8;
-        }
+        Debug.Log(pickLimbs.dragCount);
 
-        if (idleTimer >= idleThreshold)
+        //loves me, loves me not
+        if (shot6.gameObject.activeSelf == true)
         {
-            StartCoroutine(IdleText(c2Caption, 3f));
-            idleTimer = 0f;
+            //if (checkDragCount.dragged == true && checkDragCount.lovesMe == true)
+            if(pickLimbs.dragCount == 1 && reset == false)
+            {
+                string shot6Text1 = "she loves me...";
+                //Debug.Log(shot6Text1);
+                StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text1));
+                reset = true;
+            }
+            if(pickLimbs.dragCount == 2 && reset2 == false)
+            {
+                string shot6Text2 = "she loves me not...";
+                //Debug.Log(shot6Text1);
+                StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text2));
+                reset2 = true;
+            }
+            if(pickLimbs.dragCount == 3 && reset3 == false)
+            {
+                string shot6Text3 = "she loves me...";
+                //Debug.Log(shot6Text1);
+                StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text3));
+                reset3 = true;
+            }
+
+            if(pickLimbs.dragCount == 4 && reset4 == false)
+            {
+                string shot6Text4 = "she loves me not...";
+                //Debug.Log(shot6Text1);
+                StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text4));
+                reset4 = true;
+            }
+
+            if(pickLimbs.dragCount == 5 && reset5 == false)
+            {
+                string shot6Text5 = "she loves me...";
+                //Debug.Log(shot6Text1);
+                StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text5));
+                reset5 = true;
+            }
+
+            if(pickLimbs.dragCount == 6 && reset6 == false)
+            {
+                string shot6Text6 = "she loves me not...";
+                //Debug.Log(shot6Text1);
+                StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text6));
+                reset6 = true;
+            }
+            // if (checkDragCount.dragged == true && checkDragCount.lovesMe == false)
+            // {
+            //     string shot6Text2 = "she loves me not...";
+            //     StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text2));
+            //     reset2 = true;
+            // }
+
+            
         }
+        /*
+        if (shotW.gameObject.activeSelf == true) //needs tweaking, also change W to accurate shot number when comes up
+        {
+            // D timer for c2
+            if (Input.GetKey(KeyCode.D))
+            {
+                idleTimer = 0f;
+            }
+            else
+            {
+                idleTimer += Time.deltaTime/8;
+            }
+
+            if (idleTimer >= idleThreshold)
+            {
+                StartCoroutine(IdleText(c2Caption, 3f));
+                idleTimer = 0f;
+            }
+        }
+        */
 
         //FPC/Mouse Stuff
 
@@ -52,7 +130,7 @@ public class captionController : MonoBehaviour
             if (n1Done == false)
             {
                 string n1 = "am I ready to visit ******?";
-                StartCoroutine(fpcChangeText(2f, n1));
+                StartCoroutine(fpcChangeText(fpcCaption, 1.5f, 2f, n1));
                 n1Done = true;
             }
 
@@ -71,7 +149,7 @@ public class captionController : MonoBehaviour
             firstMaybe = true;
             //StartCoroutine(delayMcheck());
         }
-
+        
     }
 
     private void MouseTimer()
@@ -156,17 +234,28 @@ public class captionController : MonoBehaviour
         handScript.changed = false;
     }
 
-    private IEnumerator fpcChangeText(float seconds, string text)
+    private IEnumerator fpcChangeText(TMP_Text shotCaption, float delaySeconds, float holdSeconds, string text)
     {
-        yield return new WaitForSeconds(1.5f);
-        fpcCaption.fontStyle = FontStyles.Italic;
+        yield return new WaitForSeconds(delaySeconds);
+        shotCaption.fontStyle = FontStyles.Italic;
         fpcTextDone = false;
-        fpcCaption.text = text;
-        yield return new WaitForSeconds(seconds);
-        fpcCaption.fontStyle = FontStyles.Normal;
-        fpcCaption.text = " ";
+        shotCaption.text = text;
+        yield return new WaitForSeconds(holdSeconds);
+        shotCaption.fontStyle = FontStyles.Normal;
+        shotCaption.text = " ";
         fpcTextDone = true;
     }
+
+    //consolidate this later
+    private IEnumerator fpc1ChangeText(TMP_Text shotCaption, float holdSeconds, string text)
+    {
+        shotCaption.fontStyle = FontStyles.Italic;
+        shotCaption.text = text;
+        yield return new WaitForSeconds(holdSeconds);
+        shotCaption.fontStyle = FontStyles.Normal;
+        shotCaption.text = " ";
+    }
+    
 
     private IEnumerator delayMcheck()
     {

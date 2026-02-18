@@ -9,6 +9,7 @@ public class story : MonoBehaviour
     [SerializeField] private GameObject c3;
     [SerializeField] private GameObject shot3;
     [SerializeField] private GameObject shot4;
+    [SerializeField] private GameObject shot6;
     [SerializeField] private GameObject c4;
     [SerializeField] private GameObject c5;
     [SerializeField] private GameObject c6;
@@ -29,6 +30,9 @@ public class story : MonoBehaviour
     public bool shot2Started;
     public bool shot3Started;
     public bool shot4Started;
+    public bool shot5C;
+    public bool shot5Started;
+    public bool shot6Started;
 
     [SerializeField] private GameObject sg;
 
@@ -63,16 +67,34 @@ public class story : MonoBehaviour
 
         if (shot3Started == true)
         {
-            StartCoroutine(changeCam(2.5f, shot4));
-            StartCoroutine(detectShotChange(2.5f, shot4Bool));
+            StartCoroutine(changeCam(4.75f, shot4));
+            StartCoroutine(detectShotChange(4.75f, shot4Bool));
             shot3Started = false;
         }
 
         if (shot4Started == true)
         {
-            StartCoroutine(changeCam(3.5f, fpc2)); //may tweak after animation is done
+            StartCoroutine(changeCam(4f, fpc2)); //may tweak after animation is done
+            StartCoroutine(detectShotChange(3.96f, shot5Check));//just for shot 5, add one more line for next shot
+            StartCoroutine(detectShotChange(4f, shot5Bool));
             shot4Started = false;
         }
+
+        if (shot5Started == true)
+        {
+            ccScript.enabled = true;
+            StartCoroutine(changeCam(3f, shot6));
+            StartCoroutine(detectShotChange(3f, shot6Bool));
+            shot5Started = false;
+        }
+
+        //next shot
+        // if (shot6Started == true)
+        // {
+        //     StartCoroutine(changeCam(3f, shot6));
+        //     shot6Started = false;
+        // }
+        
 
 
         if (eightBall == true) {
@@ -113,6 +135,8 @@ public class story : MonoBehaviour
         c2.gameObject.SetActive(false);
         shot2.gameObject.SetActive(false);
         shot3.gameObject.SetActive(false);
+        shot4.gameObject.SetActive(false);
+        shot6.gameObject.SetActive(false);
         c3.gameObject.SetActive(false);
         c4.gameObject.SetActive(false);
         c5.gameObject.SetActive(false);
@@ -140,6 +164,21 @@ public class story : MonoBehaviour
     void shot4Bool()
     {
         shot4Started = true;
+    }
+
+    void shot5Check()
+    {
+        shot5C = true;
+    }
+
+    void shot5Bool()
+    {
+        shot5Started = true;
+    }
+
+    void shot6Bool()
+    {
+        shot6Started = true;
     }
 
     private IEnumerator scriptControl()
