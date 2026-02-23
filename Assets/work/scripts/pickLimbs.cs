@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class pickLimbs : MonoBehaviour
@@ -12,7 +13,9 @@ public class pickLimbs : MonoBehaviour
 
     public bool dragged;
 
-    public bool lovesMe;
+    public static bool lovesMe;
+
+    public List<AudioSource> breakSounds;
 
     void enablePhysics()
     {
@@ -36,13 +39,18 @@ public class pickLimbs : MonoBehaviour
         {
             dragCount++;
             dragged = true;
-            
+
+            int randomIndex = Random.Range(0, breakSounds.Count);
+            breakSounds[randomIndex].Play();
+
         }
         
         enablePhysics();
-        transform.position = shot6.ScreenToWorldPoint(Input.mousePosition - mousePosition);
+        //rb.constraints = RigidbodyConstraints.FreezeRotation;
+        Vector3 newPos = shot6.ScreenToWorldPoint(Input.mousePosition - mousePosition);
+        newPos.y = 20.15f;
+        transform.position = newPos;
     }
-
 
     void Update()
     {

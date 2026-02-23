@@ -13,28 +13,33 @@ public class antSpiral : MonoBehaviour
     {
         angle = Random.Range(0f, Mathf.PI * 2f);
         lastPosition = transform.position;
+        Animator anim = GetComponent<Animator>();
+        anim.Play("Base Layer.walk", 0, Random.value);
     }
 
     void Update()
     {
-        
+        angle += speed * Time.deltaTime;
         float x = centerPoint.position.x + Mathf.Cos(angle) * radius;
-        float y = centerPoint.position.y;
         float z = centerPoint.position.z + Mathf.Sin(angle) * radius;
+        Vector3 newPosition = new Vector3(x, centerPoint.position.y, z);
 
-        Vector3 newPosition = new Vector3(x, y, z);
+        Vector3 tangent = new Vector3(-Mathf.Sin(angle), 0, Mathf.Cos(angle));
+
         transform.position = newPosition;
 
-        Vector3 direction = newPosition - lastPosition;
-
-        if (direction.sqrMagnitude > 0.0001f)
+        Vector3 forwardDirection;
+        if (speed >= 0)
         {
-            transform.rotation = Quaternion.LookRotation(direction);
+            forwardDirection = tangent;
         }
-
-        lastPosition = newPosition;
-
-        angle += speed * Time.deltaTime;
-
+        else
+        {
+            forwardDirection = -tangent;
+        }
+        transform.rotation = Quaternion.LookRotation(forwardDirection);
     }
 }
+
+
+

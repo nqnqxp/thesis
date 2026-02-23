@@ -24,6 +24,8 @@ public class captionController : MonoBehaviour
     public test handScript;
 
     //public pickLimbs checkDragCount;
+    public bool resetOdd;
+    public bool resetEven;
 
     public bool fpcTextDone;
     private bool n1Done;
@@ -40,6 +42,7 @@ public class captionController : MonoBehaviour
     public bool reset5;
     public bool reset6;
 
+
     void Update()
     {
         Debug.Log(pickLimbs.dragCount);
@@ -47,60 +50,25 @@ public class captionController : MonoBehaviour
         //loves me, loves me not
         if (shot6.gameObject.activeSelf == true)
         {
-            //if (checkDragCount.dragged == true && checkDragCount.lovesMe == true)
-            if(pickLimbs.dragCount == 1 && reset == false)
+            if (pickLimbs.dragCount > 0)
             {
-                string shot6Text1 = "she loves me...";
-                //Debug.Log(shot6Text1);
-                StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text1));
-                reset = true;
-            }
-            if(pickLimbs.dragCount == 2 && reset2 == false)
-            {
-                string shot6Text2 = "she loves me not...";
-                //Debug.Log(shot6Text1);
-                StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text2));
-                reset2 = true;
-            }
-            if(pickLimbs.dragCount == 3 && reset3 == false)
-            {
-                string shot6Text3 = "she loves me...";
-                //Debug.Log(shot6Text1);
-                StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text3));
-                reset3 = true;
+                if (pickLimbs.lovesMe == true && resetOdd == false)
+                {
+                    resetEven = false;
+                    string shot6Text1 = "she loves me...";
+                    StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text1));
+                    resetOdd = true;
+                }
+                if (pickLimbs.lovesMe == false && resetEven == false)
+                {
+                    resetOdd = false;
+                    string shot6Text2 = "she loves me not...";
+                    StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text2));
+                    resetEven = true;
+                }
             }
 
-            if(pickLimbs.dragCount == 4 && reset4 == false)
-            {
-                string shot6Text4 = "she loves me not...";
-                //Debug.Log(shot6Text1);
-                StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text4));
-                reset4 = true;
-            }
 
-            if(pickLimbs.dragCount == 5 && reset5 == false)
-            {
-                string shot6Text5 = "she loves me...";
-                //Debug.Log(shot6Text1);
-                StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text5));
-                reset5 = true;
-            }
-
-            if(pickLimbs.dragCount == 6 && reset6 == false)
-            {
-                string shot6Text6 = "she loves me not...";
-                //Debug.Log(shot6Text1);
-                StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text6));
-                reset6 = true;
-            }
-            // if (checkDragCount.dragged == true && checkDragCount.lovesMe == false)
-            // {
-            //     string shot6Text2 = "she loves me not...";
-            //     StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text2));
-            //     reset2 = true;
-            // }
-
-            
         }
         /*
         if (shotW.gameObject.activeSelf == true) //needs tweaking, also change W to accurate shot number when comes up
