@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class pickLimbs : MonoBehaviour
 {
@@ -34,7 +33,7 @@ public class pickLimbs : MonoBehaviour
         rb.isKinematic = true;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnMouseEnter()
     {
         Debug.Log("hovering");
 	 	myMaterials[0] = limbTex;
@@ -42,7 +41,7 @@ public class pickLimbs : MonoBehaviour
 	    gameObject.GetComponent<Renderer>().materials = myMaterials;
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnMouseExit()
     {
         Debug.Log("not hovering");
         myMaterials[0] = limbTex;
