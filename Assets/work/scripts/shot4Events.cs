@@ -18,7 +18,7 @@ public class shot4Events : MonoBehaviour
 
     private IEnumerator moveHand()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
         sitting.SetBool("moveHand", true);
     }
 }

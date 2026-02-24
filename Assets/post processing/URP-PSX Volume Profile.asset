@@ -101,6 +101,9 @@ MonoBehaviour:
   highQualityFiltering:
     m_OverrideState: 1
     m_Value: 0
+  filter:
+    m_OverrideState: 1
+    m_Value: 0
   downscale:
     m_OverrideState: 1
     m_Value: 0
@@ -555,7 +558,7 @@ MonoBehaviour:
     m_Value: 0
   ditherThreshold:
     m_OverrideState: 1
-    m_Value: 16.7
+    m_Value: 35.3
   ditherStrength:
     m_OverrideState: 1
     m_Value: 33.7
@@ -1044,7 +1047,7 @@ MonoBehaviour:
     m_Value: 560
   colorPrecision:
     m_OverrideState: 1
-    m_Value: -95.94
+    m_Value: 103.6
 --- !u!114 &8979667047551475493
 MonoBehaviour:
   m_ObjectHideFlags: 3
