@@ -1,5 +1,7 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class pickLimbs : MonoBehaviour
 {
@@ -17,6 +19,10 @@ public class pickLimbs : MonoBehaviour
 
     public List<AudioSource> breakSounds;
 
+    public Material[] myMaterials;
+    public Material limbTex;
+    public Material onHoverTex;
+
     void enablePhysics()
     {
         rb.isKinematic = false;
@@ -26,6 +32,22 @@ public class pickLimbs : MonoBehaviour
     void disablePhysics()
     {
         rb.isKinematic = true;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("hovering");
+	 	myMaterials[0] = limbTex;
+		myMaterials[1] = onHoverTex;
+	    gameObject.GetComponent<Renderer>().materials = myMaterials;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("not hovering");
+        myMaterials[0] = limbTex;
+		myMaterials[1] = limbTex;
+	    gameObject.GetComponent<Renderer>().materials = myMaterials;
     }
 
     private Vector3 GetMousePos()
@@ -67,6 +89,11 @@ public class pickLimbs : MonoBehaviour
     private void OnMouseUp()
     {
         enablePhysics();
+    }
+
+    void Start()
+    {
+        myMaterials = gameObject.GetComponent<Renderer>().materials;
     }
 
     void Update()

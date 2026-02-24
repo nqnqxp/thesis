@@ -45,8 +45,6 @@ public class captionController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(pickLimbs.dragCount);
-
         //loves me, loves me not
         if (shot6.gameObject.activeSelf == true)
         {
