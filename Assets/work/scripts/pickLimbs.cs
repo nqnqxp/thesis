@@ -23,6 +23,11 @@ public class pickLimbs : MonoBehaviour
         rb.detectCollisions = true;
     }
 
+    void disablePhysics()
+    {
+        rb.isKinematic = true;
+    }
+
     private Vector3 GetMousePos()
     {
         return shot6.WorldToScreenPoint(transform.position);
@@ -45,17 +50,27 @@ public class pickLimbs : MonoBehaviour
 
         }
         
-        enablePhysics();
-        //rb.constraints = RigidbodyConstraints.FreezeRotation;
-        Vector3 newPos = shot6.ScreenToWorldPoint(Input.mousePosition - mousePosition);
+        disablePhysics();
+        //Vector3 newPos = shot6.ScreenToWorldPoint(Input.mousePosition - mousePosition);
+        //newPos.y = 20.15f;
+        //transform.position = newPos;
+
+
+        Vector3 screenPoint = Input.mousePosition;
+        screenPoint.z = shot6.WorldToScreenPoint(transform.position).z; 
+        Vector3 newPos = shot6.ScreenToWorldPoint(screenPoint);
+        
         newPos.y = 20.15f;
         transform.position = newPos;
     }
 
+    private void OnMouseUp()
+    {
+        enablePhysics();
+    }
+
     void Update()
     {
-        //Debug.Log(dragCount);
-        //Debug.Log(lovesMe);
 
         if (dragCount % 2 == 0)
         {
