@@ -8,6 +8,7 @@ public class shot6Events : MonoBehaviour
     public GameObject rightHand;
 
     public bool localShotStarted;
+    public shot7Events s7Events;
 
     // Update is called once per frame
     void Update()
@@ -16,6 +17,7 @@ public class shot6Events : MonoBehaviour
         {
             ants.gameObject.SetActive(false);
             rightHand.gameObject.SetActive(true);
+            s7Events.enabled = true;
             localShotStarted = true;
         }
     }

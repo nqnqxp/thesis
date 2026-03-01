@@ -33,6 +33,7 @@ public class story : MonoBehaviour
     public bool shot5C;
     public bool shot5Started;
     public bool shot6Started;
+    public bool shot7Started;
 
     [SerializeField] private GameObject sg;
 
@@ -87,15 +88,23 @@ public class story : MonoBehaviour
             StartCoroutine(detectShotChange(3f, shot6Bool));
             shot5Started = false;
         }
-
-        //next shot
-        // if (shot6Started == true)
-        // {
-        //     StartCoroutine(changeCam(3f, shot6));
-        //     shot6Started = false;
-        // }
         
-
+        if (shot6Started == true && pickLimbs.dragCount == 6)
+        {
+            StartCoroutine(changeCam(2.5f, fpc2));
+            StartCoroutine(detectShotChange(2.5f, shot7Bool));
+            StartCoroutine(waitToPlayAnim(3.5f));
+            shot6Started = false;
+        }
+        
+        //ADJUST FIRST FLOAT TO HOW LONG NEW DIALOGUE TAKES
+        //this is for shot8
+        // if (shot7Started == true)
+        // {
+        //     StartCoroutine(changeCam(2f, shot7));
+        //     StartCoroutine(detectShotChange(2f, shot8Bool));
+        //     shot8Started = false;
+        // }
 
         if (eightBall == true) {
             StartCoroutine(changeCam(0.5f, fpc1));
@@ -127,6 +136,11 @@ public class story : MonoBehaviour
         }
         
     }
+    private IEnumerator waitToPlayAnim(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        fpc2.GetComponent<Animator>().Play("panUp");
+    }
 
     private IEnumerator changeCam(float seconds, GameObject nextCam)
     {
@@ -141,6 +155,7 @@ public class story : MonoBehaviour
         c4.gameObject.SetActive(false);
         c5.gameObject.SetActive(false);
         fpc1.gameObject.SetActive(false);
+        fpc2.gameObject.SetActive(false);
         nextCam.gameObject.SetActive(true);
 
     }
@@ -179,6 +194,11 @@ public class story : MonoBehaviour
     void shot6Bool()
     {
         shot6Started = true;
+    }
+
+    void shot7Bool()
+    {
+        shot7Started = true;
     }
 
     private IEnumerator scriptControl()

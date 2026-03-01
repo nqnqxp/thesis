@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
@@ -21,6 +22,11 @@ public class pickLimbs : MonoBehaviour
     public Material[] myMaterials;
     public Material limbTex;
     public Material onHoverTex;
+
+    public handFollowMouse handfollowmouse;
+    public followHand fingerFollowScript;
+
+    public bool scriptsStopped;
 
     void enablePhysics()
     {
@@ -72,9 +78,6 @@ public class pickLimbs : MonoBehaviour
         }
         
         disablePhysics();
-        //Vector3 newPos = shot6.ScreenToWorldPoint(Input.mousePosition - mousePosition);
-        //newPos.y = 20.15f;
-        //transform.position = newPos;
 
 
         Vector3 screenPoint = Input.mousePosition;
@@ -90,6 +93,14 @@ public class pickLimbs : MonoBehaviour
         enablePhysics();
     }
 
+    private IEnumerator stopScripts()
+    {
+        yield return new WaitForSeconds(1.5f);
+        handfollowmouse.enabled = false;
+        fingerFollowScript.enabled = false;
+        //this.enabled = false;
+    }
+
     void Start()
     {
         myMaterials = gameObject.GetComponent<Renderer>().materials;
@@ -97,7 +108,11 @@ public class pickLimbs : MonoBehaviour
 
     void Update()
     {
-
+        if (dragCount == 6 && scriptsStopped == false)
+        {
+            StartCoroutine(stopScripts());
+            scriptsStopped = true;
+        }
         if (dragCount % 2 == 0)
         {
             //even

@@ -18,29 +18,31 @@ public class captionController : MonoBehaviour
     public TMP_Text c5Caption;
 
     public TMP_Text shot6Caption;
+    public TMP_Text shot7Caption;
 
     public List<string> idleTexts;
 
     public test handScript;
 
-    //public pickLimbs checkDragCount;
+    //shot6 bools
     public bool resetOdd;
     public bool resetEven;
 
+    //shot7 bool
+    public bool resetS7;
+
+    //prototype4 bools
     public bool fpcTextDone;
     private bool n1Done;
-
     public bool firstMaybe;
     public bool secondMaybe;
 
     //public GameObject shotW;
     public GameObject shot6;
-    public bool reset;
-    public bool reset2;
-    public bool reset3;
-    public bool reset4;
-    public bool reset5;
-    public bool reset6;
+    public GameObject shot7;
+    public shot7Events shot7script;
+    
+    
 
 
     void Update()
@@ -66,7 +68,13 @@ public class captionController : MonoBehaviour
                 }
             }
 
+        }
 
+        if (shot7.gameObject.activeSelf == true && shot7script.localShotStarted == true && resetS7 == false)
+        { 
+            string shot7text = "do you believe in destiny?";
+            StartCoroutine(changeText(shot7Caption, 5.5f, 1.5f, shot7text));
+            resetS7 = true;
         }
         /*
         if (shotW.gameObject.activeSelf == true) //needs tweaking, also change W to accurate shot number when comes up
@@ -115,6 +123,7 @@ public class captionController : MonoBehaviour
             firstMaybe = true;
             //StartCoroutine(delayMcheck());
         }
+
         
     }
 
@@ -153,12 +162,12 @@ public class captionController : MonoBehaviour
 
     private IEnumerator changeText(TMP_Text caption, float wait, float stay, string text)
     {
-        fpcTextDone = false;
+        //fpcTextDone = false;
         yield return new WaitForSeconds(wait);
         caption.text = text;
         yield return new WaitForSeconds(stay);
         caption.text = " ";
-        fpcTextDone = true;
+        //fpcTextDone = true;
     }
 
     private IEnumerator customChangeText1(TMP_Text caption, float wait, float stay, string text)
