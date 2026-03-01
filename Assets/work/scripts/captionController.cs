@@ -19,6 +19,10 @@ public class captionController : MonoBehaviour
 
     public TMP_Text shot6Caption;
     public TMP_Text shot7Caption;
+    public TMP_Text shot8Caption;
+    public TMP_Text shot9Caption;
+    public TMP_Text shot10Caption;
+    public TMP_Text shot11Caption;
 
     public List<string> idleTexts;
 
@@ -28,8 +32,23 @@ public class captionController : MonoBehaviour
     public bool resetOdd;
     public bool resetEven;
 
-    //shot7 bool
+    //shot7-9 bool
     public bool resetS7;
+    public bool resetS81;
+    public bool resetS91;
+    public bool resetS82;
+    public bool resetS92;
+    public bool resetS83;
+    public bool resetS93;
+    public bool shot8FirstTime = true;
+    public bool shot9FirstTime = true;
+    public bool shot8SecondTime = true;
+    public bool shot9SecondTime = true;
+
+    //shot10 bool
+    public bool resetS10;
+
+    public bool resetS11;
 
     //prototype4 bools
     public bool fpcTextDone;
@@ -41,7 +60,10 @@ public class captionController : MonoBehaviour
     public GameObject shot6;
     public GameObject shot7;
     public shot7Events shot7script;
-    
+    public GameObject shot8;
+    public GameObject shot9;
+    public GameObject shot10;
+    public GameObject shot11;
     
 
 
@@ -55,14 +77,14 @@ public class captionController : MonoBehaviour
                 if (pickLimbs.lovesMe == true && resetOdd == false)
                 {
                     resetEven = false;
-                    string shot6Text1 = "she loves me...";
+                    string shot6Text1 = "She loves me...";
                     StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text1));
                     resetOdd = true;
                 }
                 if (pickLimbs.lovesMe == false && resetEven == false)
                 {
                     resetOdd = false;
-                    string shot6Text2 = "she loves me not...";
+                    string shot6Text2 = "She loves me not...";
                     StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text2));
                     resetEven = true;
                 }
@@ -72,10 +94,79 @@ public class captionController : MonoBehaviour
 
         if (shot7.gameObject.activeSelf == true && shot7script.localShotStarted == true && resetS7 == false)
         { 
-            string shot7text = "do you believe in destiny?";
-            StartCoroutine(changeText(shot7Caption, 5.5f, 1.5f, shot7text));
+            string shot7text = "Resist seeking prognostications, or the course will start to consume you.";
+            StartCoroutine(changeText(shot7Caption, 5f, 3f, shot7text));
             resetS7 = true;
         }
+
+        if (shot8.gameObject.activeSelf == true && resetS81 == false && shot8FirstTime == true)
+        { 
+            string shot8text = "What do you think these answers will provide you?";
+            StartCoroutine(changeText(shot8Caption, 1f, 2f, shot8text));
+            //StartCoroutine(delayboolChange(3f, boolChange(resetS81)));
+            //StartCoroutine(delayboolChange(3f, () => boolChange(shot8FirstTime)));
+            resetS81 = true;
+        }
+
+        if (shot9.gameObject.activeSelf == true && resetS91 == false && shot9FirstTime == true)
+        { 
+            string shot9text = "...I don't know";
+            StartCoroutine(changeText(shot9Caption, 2f, 1.5f, shot9text));
+            resetS91 = true;
+            shot8FirstTime = false;
+        }
+
+        if (shot10.gameObject.activeSelf == true && resetS10 == false)
+        { 
+            string shot10text = "You believe in fate?";
+            StartCoroutine(changeText(shot10Caption, 2f, 1.5f, shot10text));
+            resetS10 = true;
+            shot9FirstTime = false;
+        }
+
+        // if (shot8.gameObject.activeSelf == true && resetS82 == false && shot8FirstTime == false)
+        // { 
+        //     string shot8text = "You believe in fate?";
+        //     StartCoroutine(changeText(shot8Caption, 2f, 1.5f, shot8text));
+        //     resetS82 = true;
+        //     shot9FirstTime = false;
+        // }
+
+        if (shot9.gameObject.activeSelf == true && resetS92 == false && shot9FirstTime == false)
+        { 
+            string shot9text = "...";
+            StartCoroutine(changeText(shot9Caption, 2f, 1.5f, shot9text));
+            resetS92 = true;
+            shot8SecondTime = false;
+        }
+
+        if (shot8.gameObject.activeSelf == true && resetS83 == false && shot8SecondTime == false)
+        { 
+            string shot8text = "Inevitability...";
+            StartCoroutine(changeText(shot8Caption, 2f, 1.5f, shot8text));
+            resetS83 = true;
+        }
+
+        if (shot11.gameObject.activeSelf == true && resetS11 == false)
+        { 
+            string shot11text = "The hidden rules behind what you and I see as patternless events.";
+            StartCoroutine(changeText(shot11Caption, 1.5f, 2.5f, shot11text));
+            string shot11text2 = "Events that lead to one destination.";
+            StartCoroutine(changeText(shot11Caption, 5.5f, 2f, shot11text2));
+            resetS11 = true;
+            shot9SecondTime = false;
+            
+        }
+
+        if (shot9.gameObject.activeSelf == true && resetS93 == false && shot9SecondTime == false)
+        { 
+            string shot9text = "I... don’t want to.";
+            StartCoroutine(changeText(shot9Caption, 2f, 1.5f, shot9text));
+            resetS93 = true;
+            
+        }
+        
+
         /*
         if (shotW.gameObject.activeSelf == true) //needs tweaking, also change W to accurate shot number when comes up
         {
@@ -148,6 +239,17 @@ public class captionController : MonoBehaviour
             StartCoroutine(IdleText(fpcCaption, 3f));
             idleTimer = 0f;
         }
+    }
+
+    void boolChange(bool boolname)
+    {
+        boolname = false;
+    }
+
+    private IEnumerator delayboolChange(float seconds, System.Action callback)
+    {
+        yield return new WaitForSeconds(seconds);
+        callback.Invoke();
     }
 
     private IEnumerator IdleText(TMP_Text caption, float seconds)

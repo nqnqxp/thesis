@@ -10,11 +10,15 @@ public class story : MonoBehaviour
     [SerializeField] private GameObject shot3;
     [SerializeField] private GameObject shot4;
     [SerializeField] private GameObject shot6;
+    [SerializeField] private GameObject shot8;
+    [SerializeField] private GameObject shot9;
+    [SerializeField] private GameObject shot10;
+    [SerializeField] private GameObject shot11;
     [SerializeField] private GameObject c4;
     [SerializeField] private GameObject c5;
     [SerializeField] private GameObject c6;
     [SerializeField] private GameObject fpc1;
-    [SerializeField] private GameObject fpc2;
+    [SerializeField] private GameObject fpc2; //shot 5 and 7
 
     public GameObject sgCharacterSit;
     public GameObject sgCharacterStand;
@@ -34,6 +38,13 @@ public class story : MonoBehaviour
     public bool shot5Started;
     public bool shot6Started;
     public bool shot7Started;
+    public bool shot8Started;
+    public bool shot9Started;
+    public bool shot10Started;
+    public bool shot11Started;
+    public bool shot12Started;
+    public bool shot13Started;
+    public bool shot14Started;
 
     [SerializeField] private GameObject sg;
 
@@ -44,7 +55,7 @@ public class story : MonoBehaviour
 
         handScript.enabled = false;
         ccScript.enabled = false;
-        sg.GetComponent<pControl>().enabled = false; //need to enable it when shot starts somewhere
+        sg.GetComponent<pControl>().enabled = false; //need to enable it when shot starts somewhere (walking)
         sgCharacterStand.gameObject.SetActive(false);
 
     }
@@ -76,7 +87,7 @@ public class story : MonoBehaviour
         if (shot4Started == true)
         {
             StartCoroutine(changeCam(4f, fpc2)); //may tweak after animation is done
-            StartCoroutine(detectShotChange(3.96f, shot5Check));//just for shot 5, add one more line for next shot
+            StartCoroutine(detectShotChange(3.96f, shot5Check));//just for shot 5
             StartCoroutine(detectShotChange(4f, shot5Bool));
             shot4Started = false;
         }
@@ -93,19 +104,61 @@ public class story : MonoBehaviour
         {
             StartCoroutine(changeCam(2.5f, fpc2));
             StartCoroutine(detectShotChange(2.5f, shot7Bool));
-            StartCoroutine(waitToPlayAnim(3.5f));
+            StartCoroutine(waitToPlayAnim(4.5f));
             shot6Started = false;
         }
         
-        //ADJUST FIRST FLOAT TO HOW LONG NEW DIALOGUE TAKES
-        //this is for shot8
-        // if (shot7Started == true)
-        // {
-        //     StartCoroutine(changeCam(2f, shot7));
-        //     StartCoroutine(detectShotChange(2f, shot8Bool));
-        //     shot8Started = false;
-        // }
+        if (shot7Started == true)
+        {
+            StartCoroutine(changeCam(8.25f, shot8));
+            StartCoroutine(detectShotChange(8.25f, shot8Bool)); //what do u think these..
+            shot7Started = false;
+        }
 
+        if (shot8Started == true)
+        {
+            StartCoroutine(changeCam(5f, shot9));
+            StartCoroutine(detectShotChange(5f, shot9Bool)); //idk
+            shot8Started = false;
+        }
+
+        if (shot9Started == true)
+        {
+            StartCoroutine(changeCam(5f, shot10)); //number of shots: 10, WS
+            StartCoroutine(detectShotChange(5f, shot10Bool));//u believe in fate?
+            shot9Started = false;
+        }
+
+        if (shot10Started == true)
+        {
+            StartCoroutine(changeCam(5f, shot9)); //number of shots: 11, just going back to shot9 composition
+            StartCoroutine(detectShotChange(5f, shot11Bool)); //...
+            shot10Started = false;
+        }
+
+        if (shot11Started == true)
+        {
+            StartCoroutine(changeCam(5f, shot8)); //number of shots: 12, just going back to shot8 composition
+            StartCoroutine(detectShotChange(5f, shot12Bool)); // 1 line
+            shot11Started = false;
+        }
+
+        if (shot12Started == true)
+        {
+            StartCoroutine(changeCam(5f, shot11)); //number of shots: 13, just going back to shot10 composition
+            StartCoroutine(detectShotChange(5f, shot13Bool)); // 2 lines
+            shot12Started = false;
+        }
+
+        
+        if (shot13Started == true)
+        {//change time
+            StartCoroutine(changeCam(8f, shot9)); //number of shots: 14, just going back to shot9 composition
+            StartCoroutine(detectShotChange(8f, shot14Bool)); // i dont want to
+            shot13Started = false;
+        }
+
+        //--------------------------------------------------------
         if (eightBall == true) {
             StartCoroutine(changeCam(0.5f, fpc1));
             handScript.camChanged = true; //enable shake input
@@ -151,6 +204,8 @@ public class story : MonoBehaviour
         shot3.gameObject.SetActive(false);
         shot4.gameObject.SetActive(false);
         shot6.gameObject.SetActive(false);
+        shot8.gameObject.SetActive(false);
+        shot9.gameObject.SetActive(false);
         c3.gameObject.SetActive(false);
         c4.gameObject.SetActive(false);
         c5.gameObject.SetActive(false);
@@ -199,6 +254,39 @@ public class story : MonoBehaviour
     void shot7Bool()
     {
         shot7Started = true;
+    }
+
+    void shot8Bool()
+    {
+        shot8Started = true;
+    }
+
+    void shot9Bool()
+    {
+        shot9Started = true;
+    }
+
+    void shot10Bool()
+    {
+        shot10Started = true;
+    }
+    void shot11Bool()
+    {
+        shot11Started = true;
+    }
+    void shot12Bool()
+    {
+        shot12Started = true;
+    }
+
+    void shot13Bool()
+    {
+        shot13Started = true;
+    }
+
+    void shot14Bool()
+    {
+        shot14Started = true;
     }
 
     private IEnumerator scriptControl()
