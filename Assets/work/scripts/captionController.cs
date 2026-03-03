@@ -40,10 +40,16 @@ public class captionController : MonoBehaviour
     public bool resetS92;
     public bool resetS83;
     public bool resetS93;
+    public bool resetS84;
+    public bool resetS94;
+    public bool resetS85;
     public bool shot8FirstTime = true;
     public bool shot9FirstTime = true;
     public bool shot8SecondTime = true;
     public bool shot9SecondTime = true;
+    public bool shot8ThirdTime = true;
+    public bool shot9ThirdTime = true;
+    public bool shot8FourthTime = true;
 
     //shot10 bool
     public bool resetS10;
@@ -163,9 +169,45 @@ public class captionController : MonoBehaviour
             string shot9text = "I... don’t want to.";
             StartCoroutine(changeText(shot9Caption, 2f, 1.5f, shot9text));
             resetS93 = true;
-            
+            shot8ThirdTime = false;
         }
-        
+
+        if (shot8.gameObject.activeSelf == true && resetS84 == false && shot8ThirdTime == false)
+        { 
+            string shot8text1 = "So free will...";
+            StartCoroutine(changeText(shot8Caption, 2f, 1.5f, shot8text1));
+            string shot8text2 = "...that one’s choices will change what happens to them.";
+            StartCoroutine(changeText(shot8Caption, 5f, 2f, shot8text2));
+            string shot8text3 = "Choosing to eat bread or porridge.";
+            StartCoroutine(changeText(shot8Caption, 8.5f, 2f, shot8text3));
+            string shot8text4 = "To visit a garden or a cemetery.";
+            StartCoroutine(changeText(shot8Caption, 12f, 2f, shot8text4));
+            string shot8text5 = "By making such trivial decisions, we pretend to be masters of our destiny.";
+            StartCoroutine(changeText(shot8Caption, 15.5f, 3f, shot8text5));
+            resetS84 = true;
+            shot9ThirdTime = false;
+        }
+
+        if (shot9.gameObject.activeSelf == true && resetS94 == false && shot9ThirdTime == false)
+        { 
+            string shot9text = "... I don’t know what my destiny is.";
+            StartCoroutine(changeText(shot9Caption, 2f, 1.5f, shot9text));
+            resetS94 = true;
+            shot8FourthTime = false;
+        }
+
+        if (shot8.gameObject.activeSelf == true && resetS85 == false && shot8FourthTime == false)
+        { 
+            string shot8text1 = "Yes, you do.";
+            StartCoroutine(changeText(shot8Caption, 2f, 1.5f, shot8text1));
+            string shot8text2 = "Everyone’s destiny is ultimately the same.";
+            StartCoroutine(changeText(shot8Caption, 5f, 2f, shot8text2));
+            string shot8text3 = "Even mine.";
+            StartCoroutine(changeText(shot8Caption, 8.5f, 1.5f, shot8text3));
+            string shot8text4 = "If the inquisitiveness takes you first, use this instead, if you’d like.";
+            StartCoroutine(changeText(shot8Caption, 11.5f, 2.5f, shot8text4));
+            resetS85 = true;
+        }
 
         /*
         if (shotW.gameObject.activeSelf == true) //needs tweaking, also change W to accurate shot number when comes up

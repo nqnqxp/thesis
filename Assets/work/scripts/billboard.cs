@@ -12,7 +12,15 @@ public class billboard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(cameraTransform);
-        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+    
+        Vector3 targetDir = transform.position - cameraTransform.position;
+        targetDir.y = 0;
+        
+        if (targetDir != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(targetDir);
+        }
+
+        
     }
 }

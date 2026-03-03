@@ -12,7 +12,7 @@ namespace PSX
         public override void Create()
         {
             ditheringPass = new DitheringPass();
-            ditheringPass.renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
+            ditheringPass.renderPassEvent = RenderPassEvent.AfterRenderingTransparents;
         }
 
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)

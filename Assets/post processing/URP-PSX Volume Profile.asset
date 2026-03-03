@@ -91,7 +91,7 @@ MonoBehaviour:
     m_Value: 0.42
   scatter:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.75
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -211,25 +211,25 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 800
   gaussianEnd:
     m_OverrideState: 1
-    m_Value: 30
+    m_Value: 2000
   gaussianMaxRadius:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 1.5
   highQualitySampling:
     m_OverrideState: 1
     m_Value: 0
   focusDistance:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 16.65
   aperture:
     m_OverrideState: 1
-    m_Value: 5.6
+    m_Value: 14
   focalLength:
     m_OverrideState: 1
     m_Value: 50
@@ -564,7 +564,7 @@ MonoBehaviour:
     m_Value: 33.7
   ditherScale:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 4
 --- !u!114 &-875963932980996764
 MonoBehaviour:
   m_ObjectHideFlags: 3

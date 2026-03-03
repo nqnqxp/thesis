@@ -21,6 +21,7 @@ public class story : MonoBehaviour
     [SerializeField] private GameObject fpc2; //shot 5 and 7
 
     public GameObject sgCharacterSit;
+    public GameObject sgCharacterSit3Q;
     public GameObject sgCharacterStand;
 
     public startGame startBool;
@@ -45,6 +46,9 @@ public class story : MonoBehaviour
     public bool shot12Started;
     public bool shot13Started;
     public bool shot14Started;
+    public bool shot15Started;
+    public bool shot16Started;
+    public bool shot17Started;
 
     [SerializeField] private GameObject sg;
 
@@ -124,9 +128,21 @@ public class story : MonoBehaviour
 
         if (shot9Started == true)
         {
-            StartCoroutine(changeCam(5f, shot10)); //number of shots: 10, WS
+            StartCoroutine(waitToPlayIdkAnim());//start of shot9
+            StartCoroutine(changeCam(5f, shot10)); //triggers shot 10, number of shots: 10, WS
             StartCoroutine(detectShotChange(5f, shot10Bool));//u believe in fate?
             shot9Started = false;
+        }
+
+        if (shot11.gameObject.activeSelf == true)
+        {
+            sgCharacterSit3Q.GetComponent<billboard>().enabled = true;
+        }
+        //if (shot11.gameObject.activeSelf == false)
+        else
+        {
+            sgCharacterSit3Q.transform.eulerAngles = new Vector3(0f, -13.558f, 0f);
+            sgCharacterSit3Q.GetComponent<billboard>().enabled = false;
         }
 
         if (shot10Started == true)
@@ -138,6 +154,7 @@ public class story : MonoBehaviour
 
         if (shot11Started == true)
         {
+            sgCharacterSit3Q.GetComponent<Animator>().Play("nervy");
             StartCoroutine(changeCam(5f, shot8)); //number of shots: 12, just going back to shot8 composition
             StartCoroutine(detectShotChange(5f, shot12Bool)); // 1 line
             shot11Started = false;
@@ -152,10 +169,33 @@ public class story : MonoBehaviour
 
         
         if (shot13Started == true)
-        {//change time
+        {
             StartCoroutine(changeCam(8f, shot9)); //number of shots: 14, just going back to shot9 composition
             StartCoroutine(detectShotChange(8f, shot14Bool)); // i dont want to
             shot13Started = false;
+        }
+
+        if (shot14Started == true)
+        {
+            StartCoroutine(waitToPlayIdwtAnim());
+            StartCoroutine(changeCam(5f, shot8)); //number of shots: 15, just going back to shot8 composition
+            StartCoroutine(detectShotChange(5f, shot15Bool)); // so free will... etc.
+            shot14Started = false;
+        }
+
+        if (shot15Started == true)
+        {
+            StartCoroutine(waitToPlayIdkmdiAnim());
+            StartCoroutine(changeCam(19f, shot9)); //number of shots: 16, just going back to shot9 composition
+            StartCoroutine(detectShotChange(19f, shot16Bool)); // .. I don’t know what my destiny is.
+            shot15Started = false;
+        }
+
+        if (shot16Started == true)
+        {
+            StartCoroutine(changeCam(5f, shot8)); //number of shots: 17, just going back to shot8 composition
+            StartCoroutine(detectShotChange(5f, shot17Bool)); //Yes you do, etc.
+            shot16Started = false;
         }
 
         //--------------------------------------------------------
@@ -189,6 +229,25 @@ public class story : MonoBehaviour
         }
         
     }
+
+    private IEnumerator waitToPlayIdkAnim()
+    {
+        yield return new WaitForSeconds(2f);
+        sgCharacterSit3Q.GetComponent<Animator>().Play("idk");
+    }
+
+    private IEnumerator waitToPlayIdwtAnim()
+    {
+        yield return new WaitForSeconds(2f);
+        sgCharacterSit3Q.GetComponent<Animator>().Play("idwt");
+    }
+
+    private IEnumerator waitToPlayIdkmdiAnim()
+    {
+        yield return new WaitForSeconds(2f);
+        sgCharacterSit3Q.GetComponent<Animator>().Play("idkwmdi");
+    }
+
     private IEnumerator waitToPlayAnim(float seconds)
     {
         yield return new WaitForSeconds(seconds);
@@ -206,6 +265,8 @@ public class story : MonoBehaviour
         shot6.gameObject.SetActive(false);
         shot8.gameObject.SetActive(false);
         shot9.gameObject.SetActive(false);
+        shot10.gameObject.SetActive(false);
+        shot11.gameObject.SetActive(false);
         c3.gameObject.SetActive(false);
         c4.gameObject.SetActive(false);
         c5.gameObject.SetActive(false);
@@ -287,6 +348,21 @@ public class story : MonoBehaviour
     void shot14Bool()
     {
         shot14Started = true;
+    }
+
+    void shot15Bool()
+    {
+        shot15Started = true;
+    }
+
+    void shot16Bool()
+    {
+        shot16Started = true;
+    }
+
+    void shot17Bool()
+    {
+        shot17Started = true;
     }
 
     private IEnumerator scriptControl()

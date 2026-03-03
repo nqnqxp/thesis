@@ -12,7 +12,7 @@ namespace PSX
         public override void Create()
         {
             pixelationPass = new PixelationPass();
-            pixelationPass.renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
+            pixelationPass.renderPassEvent = RenderPassEvent.AfterRenderingTransparents;
         }
 
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
