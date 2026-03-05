@@ -7,6 +7,7 @@ public class restartGame : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.P))
         {
+            pickLimbs.dragCount = 0;
             restart();
         }
     }
