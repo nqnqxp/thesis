@@ -114,8 +114,8 @@ public class story : MonoBehaviour
         
         if (shot7Started == true)
         {
-            StartCoroutine(changeCam(8.25f, shot8));
-            StartCoroutine(detectShotChange(8.25f, shot8Bool)); //what do u think these..
+            StartCoroutine(changeCam(9.25f, shot8));
+            StartCoroutine(detectShotChange(9.25f, shot8Bool)); //what do u think these..
             shot7Started = false;
         }
 
@@ -128,22 +128,22 @@ public class story : MonoBehaviour
 
         if (shot9Started == true)
         {
-            StartCoroutine(waitToPlayIdkAnim());//start of shot9
+            //StartCoroutine(waitToPlayIdkAnim());//start of shot9
             StartCoroutine(changeCam(5f, shot10)); //triggers shot 10, number of shots: 10, WS
             StartCoroutine(detectShotChange(5f, shot10Bool));//u believe in fate?
             shot9Started = false;
         }
 
-        if (shot11.gameObject.activeSelf == true)
-        {
-            sgCharacterSit3Q.GetComponent<billboard>().enabled = true;
-        }
-        //if (shot11.gameObject.activeSelf == false)
-        else
-        {
-            sgCharacterSit3Q.transform.eulerAngles = new Vector3(0f, -13.558f, 0f);
-            sgCharacterSit3Q.GetComponent<billboard>().enabled = false;
-        }
+        // if (shot11.gameObject.activeSelf == true)
+        // {
+        //     sgCharacterSit3Q.GetComponent<billboard>().enabled = true;
+        // }
+        // //if (shot11.gameObject.activeSelf == false)
+        // else
+        // {
+        //     sgCharacterSit3Q.transform.eulerAngles = new Vector3(0f, -13.558f, 0f);
+        //     sgCharacterSit3Q.GetComponent<billboard>().enabled = false;
+        // }
 
         if (shot10Started == true)
         {
@@ -154,9 +154,9 @@ public class story : MonoBehaviour
 
         if (shot11Started == true)
         {
-            sgCharacterSit3Q.GetComponent<Animator>().Play("nervy");
-            StartCoroutine(changeCam(5f, shot8)); //number of shots: 12, just going back to shot8 composition
-            StartCoroutine(detectShotChange(5f, shot12Bool)); // 1 line
+            //sgCharacterSit3Q.GetComponent<Animator>().Play("nervy");
+            StartCoroutine(changeCam(7f, shot8)); //number of shots: 12, just going back to shot8 composition
+            StartCoroutine(detectShotChange(7f, shot12Bool)); // 2 lines
             shot11Started = false;
         }
 
@@ -177,7 +177,7 @@ public class story : MonoBehaviour
 
         if (shot14Started == true)
         {
-            StartCoroutine(waitToPlayIdwtAnim());
+            //StartCoroutine(waitToPlayIdwtAnim());
             StartCoroutine(changeCam(5f, shot8)); //number of shots: 15, just going back to shot8 composition
             StartCoroutine(detectShotChange(5f, shot15Bool)); // so free will... etc.
             shot14Started = false;
@@ -185,7 +185,6 @@ public class story : MonoBehaviour
 
         if (shot15Started == true)
         {
-            StartCoroutine(waitToPlayIdkmdiAnim());
             StartCoroutine(changeCam(19f, shot9)); //number of shots: 16, just going back to shot9 composition
             StartCoroutine(detectShotChange(19f, shot16Bool)); // .. I don’t know what my destiny is.
             shot15Started = false;
@@ -193,6 +192,7 @@ public class story : MonoBehaviour
 
         if (shot16Started == true)
         {
+            //StartCoroutine(waitToPlayIdkmdiAnim());
             StartCoroutine(changeCam(5f, shot8)); //number of shots: 17, just going back to shot8 composition
             StartCoroutine(detectShotChange(5f, shot17Bool)); //Yes you do, etc.
             shot16Started = false;

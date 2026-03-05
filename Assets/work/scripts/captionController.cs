@@ -82,16 +82,16 @@ public class captionController : MonoBehaviour
             {
                 if (pickLimbs.lovesMe == true && resetOdd == false)
                 {
-                    resetEven = false;
                     string shot6Text1 = "She loves me...";
                     StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text1));
+                    resetEven = false;
                     resetOdd = true;
                 }
                 if (pickLimbs.lovesMe == false && resetEven == false)
                 {
-                    resetOdd = false;
                     string shot6Text2 = "She loves me not...";
                     StartCoroutine(fpc1ChangeText(shot6Caption, 2f, shot6Text2));
+                    resetOdd = false;
                     resetEven = true;
                 }
             }
@@ -101,7 +101,7 @@ public class captionController : MonoBehaviour
         if (shot7.gameObject.activeSelf == true && shot7script.localShotStarted == true && resetS7 == false)
         { 
             string shot7text = "Resist seeking prognostications, or the course will start to consume you.";
-            StartCoroutine(changeText(shot7Caption, 5f, 3f, shot7text));
+            StartCoroutine(changeText(shot7Caption, 5f, 4f, shot7text));
             resetS7 = true;
         }
 
@@ -148,14 +148,16 @@ public class captionController : MonoBehaviour
 
         if (shot8.gameObject.activeSelf == true && resetS83 == false && shot8SecondTime == false)
         { 
-            string shot8text = "Inevitability...";
-            StartCoroutine(changeText(shot8Caption, 2f, 1.5f, shot8text));
+            string shot8text1 = "That's right.";
+            StartCoroutine(changeText(shot8Caption, 2f, 1.5f, shot8text1));
+            string shot8text2 = "Inevitability...";
+            StartCoroutine(changeText(shot8Caption, 4.5f, 1.5f, shot8text2));
             resetS83 = true;
         }
 
         if (shot11.gameObject.activeSelf == true && resetS11 == false)
         { 
-            string shot11text = "The hidden rules behind what you and I see as patternless events.";
+            string shot11text = "...The hidden rules behind what you see as patternless events.";
             StartCoroutine(changeText(shot11Caption, 1.5f, 2.5f, shot11text));
             string shot11text2 = "Events that lead to one destination.";
             StartCoroutine(changeText(shot11Caption, 5.5f, 2f, shot11text2));
@@ -174,9 +176,9 @@ public class captionController : MonoBehaviour
 
         if (shot8.gameObject.activeSelf == true && resetS84 == false && shot8ThirdTime == false)
         { 
-            string shot8text1 = "So free will...";
+            string shot8text1 = "So, free will...";
             StartCoroutine(changeText(shot8Caption, 2f, 1.5f, shot8text1));
-            string shot8text2 = "...that one’s choices will change what happens to them.";
+            string shot8text2 = "...that one’s choices are really their own.";
             StartCoroutine(changeText(shot8Caption, 5f, 2f, shot8text2));
             string shot8text3 = "Choosing to eat bread or porridge.";
             StartCoroutine(changeText(shot8Caption, 8.5f, 2f, shot8text3));
@@ -205,7 +207,7 @@ public class captionController : MonoBehaviour
             string shot8text3 = "Even mine.";
             StartCoroutine(changeText(shot8Caption, 8.5f, 1.5f, shot8text3));
             string shot8text4 = "If the inquisitiveness takes you first, use this instead, if you’d like.";
-            StartCoroutine(changeText(shot8Caption, 11.5f, 2.5f, shot8text4));
+            StartCoroutine(changeText(shot8Caption, 12.5f, 2.5f, shot8text4));
             resetS85 = true;
         }
 

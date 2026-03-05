@@ -91,6 +91,7 @@ public class pickLimbs : MonoBehaviour
     private void OnMouseUp()
     {
         enablePhysics();
+        
     }
 
     private IEnumerator stopScripts()

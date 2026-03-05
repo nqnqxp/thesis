@@ -8,43 +8,6 @@ ShaderVariantCollection:
   m_PrefabAsset: {fileID: 0}
   m_Name: NewShaderVariants
   m_Shaders:
-  - first: {fileID: 0}
-    second:
-      variants:
-      - keywords: FOG_EXP2
-        passType: 0
-      - keywords: 
-        passType: 13
-  - first: {fileID: 0}
-    second:
-      variants:
-      - keywords: FOG_EXP2
-        passType: 0
-      - keywords: 
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHT_SHADOWS _CLUSTER_LIGHT_LOOP _LIGHT_LAYERS
-          _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING
-          _REFLECTION_PROBE_BOX_PROJECTION
-        passType: 13
-      - keywords: FOG_EXP2 _CLUSTER_LIGHT_LOOP _MAIN_LIGHT_SHADOWS
-        passType: 13
-      - keywords: FOG_EXP2 _CLUSTER_LIGHT_LOOP _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_BLENDING
-          _REFLECTION_PROBE_BOX_PROJECTION
-        passType: 13
-  - first: {fileID: 0}
-    second:
-      variants:
-      - keywords: FOG_EXP2
-        passType: 0
-      - keywords: 
-        passType: 13
-  - first: {fileID: 0}
-    second:
-      variants:
-      - keywords: FOG_EXP2
-        passType: 0
-      - keywords: 
-        passType: 13
   - first: {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
     second:
       variants:
@@ -113,11 +76,7 @@ ShaderVariantCollection:
   - first: {fileID: 4800000, guid: d6dae50ee9e1bfa4db75f19f99355220, type: 3}
     second:
       variants:
-      - keywords: 
-        passType: 0
       - keywords: _DEPTH_MSAA_4
-        passType: 0
-      - keywords: _OUTPUT_DEPTH
         passType: 0
   - first: {fileID: 4800000, guid: 65df88701913c224d95fc554db28381a, type: 3}
     second:
@@ -129,7 +88,10 @@ ShaderVariantCollection:
       variants:
       - keywords: _BLOOM_LQ _DITHERING _FILM_GRAIN
         passType: 0
-      - keywords: _BLOOM_LQ _FILM_GRAIN
+  - first: {fileID: 4800000, guid: 5e7134d6e63e0bc47a1dd2669cedb379, type: 3}
+    second:
+      variants:
+      - keywords: 
         passType: 0
   - first: {fileID: 4800000, guid: 5f1864addb451f54bae8c86d230f736e, type: 3}
     second:
@@ -156,23 +118,6 @@ ShaderVariantCollection:
       variants:
       - keywords: 
         passType: 8
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHT_SHADOWS _CLUSTER_LIGHT_LOOP _LIGHT_LAYERS
-          _MAIN_LIGHT_SHADOWS_CASCADE _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING
-          _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHT_SHADOWS _CLUSTER_LIGHT_LOOP _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS
-          _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION
-        passType: 13
-  - first: {fileID: 4800000, guid: 50b406436c6214c49aaaa6011b71dde8, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
-  - first: {fileID: 4800000, guid: 5caf62d8bd7c44596ace77ef9eb8ea31, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
   - first: {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
     second:
       variants:
@@ -183,12 +128,6 @@ ShaderVariantCollection:
       variants:
       - keywords: 
         passType: 8
-      - keywords: 
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHT_SHADOWS _CLUSTER_LIGHT_LOOP _LIGHT_LAYERS
-          _MAIN_LIGHT_SHADOWS_CASCADE _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING
-          _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT
-        passType: 13
   - first: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
     second:
       variants:
@@ -212,14 +151,9 @@ ShaderVariantCollection:
         passType: 8
       - keywords: INSTANCING_ON
         passType: 8
-      - keywords: 
-        passType: 13
       - keywords: FOG_EXP2 _ADDITIONAL_LIGHT_SHADOWS _CLUSTER_LIGHT_LOOP _LIGHT_LAYERS
           _MAIN_LIGHT_SHADOWS_CASCADE _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING
           _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHT_SHADOWS _CLUSTER_LIGHT_LOOP _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS
-          _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION
         passType: 13
   - first: {fileID: 4800000, guid: 6cc37f589a3171847bd1dc6f9224ccf3, type: 3}
     second:
@@ -231,14 +165,3 @@ ShaderVariantCollection:
       variants:
       - keywords: 
         passType: 0
-  - first: {fileID: -6465566751694194690, guid: 45121eed7683c487fb646d426ff1af75, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
-      - keywords: FOG_EXP2
-        passType: 0
-      - keywords: 
-        passType: 8
-      - keywords: 
-        passType: 13
